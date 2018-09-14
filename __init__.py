@@ -5,6 +5,7 @@ from anki.hooks import addHook
 from anki.importing.noteimp import NoteImporter, ForeignNote
 import http.client, urllib.request, urllib.parse, urllib.error
 from urllib.parse import urlparse
+from markdown import markdown
 import hashlib
 import ssl
 import json
@@ -73,8 +74,8 @@ class AirtableImporter(NoteImporter):
                         if not isinstance(fields[key], str) and not isinstance(fields[key], str):
                             fields[key] = str(fields[key])
 
-                        asciiToHtml = fields[key].replace("\n", "<br/>")
-                        note.fields.append(asciiToHtml)
+                        mdToHtml = markdown(fields[key])
+                        note.fields.append(mdToHtml)
                 else:
                     note.fields.append("")
 
