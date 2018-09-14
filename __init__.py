@@ -106,7 +106,7 @@ class AirtableImporter(NoteImporter):
         json_response = json.loads(raw_response)
 
         if "error" in json_response:
-            sys.stderr.write(raw_response)
+            sys.stderr.write(json.dumps(json_response))
 
         records = json_response["records"]
 
