@@ -44,7 +44,7 @@ class AirtableImporter(NoteImporter):
                     fieldNames = models.fieldNames(model)
 
     def fields(self):
-        return len(self.model['flds'])
+        return len(self.model["flds"])
 
     def foreignNotes(self):
         notes = []
@@ -56,7 +56,7 @@ class AirtableImporter(NoteImporter):
             modelFields = self.model["flds"]
 
             for field in modelFields:
-                key = field['name']
+                key = field["name"]
 
                 # sys.stderr.write(key + "\n")
 
@@ -125,7 +125,7 @@ class AirtableImporter(NoteImporter):
                 url = medium["thumbnails"]["large"]["url"]
 
             _, extension = os.path.splitext(url)
-            digest = hashlib.md5(url.encode('utf-8')).hexdigest()
+            digest = hashlib.md5(url.encode("utf-8")).hexdigest()
             filename = "{}{}".format(digest, extension)
 
             location = str(Config["media_path"]).format(filename)
@@ -157,10 +157,10 @@ def airtableImport(col, deck, modelName, table, view, app_key):
         template = mw.col.models.newTemplate("Default")
         mw.col.models.addTemplate(model, template)
 
-    model['did'] = did
+    model["did"] = did
 
     deck = mw.col.decks.get(did)
-    deck['mid'] = model['id']
+    deck["mid"] = model["id"]
     mw.col.decks.save(deck)
 
     airtable = AirtableImporter(mw.col, table, view, Config["key"], app_key)
